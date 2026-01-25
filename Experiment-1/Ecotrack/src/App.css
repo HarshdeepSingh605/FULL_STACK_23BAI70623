@@ -2,10 +2,15 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-content {
+  flex: 1;
   padding: 2rem;
+  padding-top: 3rem;
 }
 
 .card {
@@ -16,11 +21,17 @@
   margin: 1em 0;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  backdrop-filter: blur(10px);
 }
 
 .card:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.card h3 {
+  margin-top: 0;
 }
 
 .stats-container {
@@ -28,6 +39,7 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
   margin: 2rem 0;
+  width: 100%;
 }
 
 .stat-card {
@@ -37,6 +49,15 @@
   border-radius: 12px;
   box-shadow: var(--shadow-md);
   text-align: center;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .stat-card h3 {
@@ -45,12 +66,19 @@
   opacity: 0.9;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: inherit;
 }
 
 .stat-card .value {
   font-size: 2.5em;
   font-weight: 700;
   margin: 0.5em 0;
+  color: inherit;
+}
+
+.stat-card .unit {
+  font-size: 0.85em;
+  opacity: 0.85;
 }
 
 .logo {
@@ -79,17 +107,62 @@
   animation: fadeIn 0.4s ease-out;
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
 @media (max-width: 768px) {
   .app-content {
     padding: 1rem;
+    padding-top: 2rem;
   }
   
   .stats-container {
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin: 1.5rem 0;
   }
   
   .card {
     padding: 1em;
+    margin: 0.75em 0;
+  }
+
+  .stat-card .value {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-content {
+    padding: 0.75rem;
+    padding-top: 1.5rem;
+  }
+
+  .card {
+    padding: 0.75em;
+  }
+
+  .stat-card {
+    padding: 1em;
+  }
+
+  .stat-card .value {
+    font-size: 1.75em;
+  }
+
+  .stat-card h3 {
+    font-size: 0.8em;
   }
 }
